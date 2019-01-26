@@ -52,7 +52,7 @@ var game = (function() {
   let drawSnake = arr => {
     for (var i = 0; i < arr.length; i++) {
       if (i == 0) {
-        ctx.fillStyle = blinkInterval % 2 === 0 ? "red" : "green";
+        ctx.fillStyle = blinkInterval % 3 === 0 ? "red" : UI_CONFIG.snakeColor;
         ctx.fillRect(
           snake[0].x,
           snake[0].y,
