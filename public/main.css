@@ -1,6 +1,29 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
+@keyframes animateImg {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(.97);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+  75% {
+    transform:  scale(1.04);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
 a {
   color: red;
   text-decoration: none;
@@ -10,7 +33,7 @@ ul {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 65%;
   padding-left: 0;
   background-color: white;
@@ -32,85 +55,93 @@ ul {
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   line-height: 1.2;
   font-size: 16px;
   padding: 0;
   margin: 0;
 }
 table {
-    border: 3px solid white;
-    border-spacing: 0;
-    box-shadow: inset 0 0 10px #000000;
-  }
-  td {
-    font-size: 8px;
-    min-width: 20px;
-    height: 22px;
-    padding: 0
-  }
+  border: 3px solid white;
+  border-spacing: 0;
+  box-shadow: inset 0 0 10px #000000;
+}
+td {
+  font-size: 8px;
+  min-width: 20px;
+  height: 22px;
+  padding: 0;
+}
 
-  /* main overlay */
-  #game-panel,#highscores-page,#paused-page {
-    height: 400px;
-    position: absolute;
-    left: 11px;
-    top: 44px;
-    width: 340px;
-    background-color: #000;
-  }
-  #game-info,#footer {
-    display: flex;
-    justify-content: space-around;
-    padding: 5px 0;
-  }
-  .flex-item {
-    color: white;
-    font-size: 13px;
-  }
-  #container {
-    max-width: 360px;
-    padding: 18px 10px;
-    background-color: #000000;
-    position: relative;
-    left: 300px;
-  }
-  
-  #highscores-page {
-    background: #000000;
-    display:none;
-  }
-  #paused-page {
-    display: none;
-    color: white;
-    align-items: center;
-    justify-content: center;
-  }
-  #canvas {
-    border: 1px solid white;
-  }
-  #controls {
-    position: absolute;
-    bottom: 95px;
-    right: 20px;
-    color: white;
-  }
-  #game-menu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%)
-  }
-  #game-menu .logo {
-    align-self: center
-  }
+/* main overlay */
+#game-panel,
+#highscores-page,
+#paused-page {
+  height: 400px;
+  position: absolute;
+  left: 11px;
+  top: 44px;
+  width: 340px;
+  background-color: #000;
+}
+#game-info,
+#footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0;
+}
+.flex-item {
+  color: white;
+  font-size: 13px;
+}
+#container {
+  max-width: 360px;
+  padding: 18px 10px;
+  background-color: #000000;
+  position: relative;
+  left: 300px;
+}
 
-  #game-menu > *:not(:last-child) {
-    margin-bottom: 20px;
-  }
+#highscores-page {
+  background: #000000;
+  display: none;
+}
+#paused-page {
+  display: none;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+#canvas {
+  border: 1px solid white;
+}
+#controls {
+  position: absolute;
+  bottom: 95px;
+  right: 20px;
+  color: white;
+}
+#game-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.game-logo {
+  animation: animateImg;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+#game-menu .logo {
+  align-self: center;
+}
 
-  #game-menu > *:first-child{
-    margin-bottom: 65px;
-  }
+#game-menu > *:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+#game-menu > *:first-child {
+  margin-bottom: 65px;
+}
+
+
