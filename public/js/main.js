@@ -1,18 +1,15 @@
 var game = (function() {
-  const startGameBtn = document.getElementById("startGameBtn");
-  const highScoreBtn = document.getElementById("highscoresBtn");
-  const highscorePage = document.getElementById("highscores-page");
+ const startGameBtn = document.getElementById("startGameBtn");
   const mainPage = document.getElementById("game-panel");
   const pausedPage =document.getElementById("paused-page");
- 
-  var canvas = document.getElementById("canvas");
-  var canvasWidth = 340;
-  var canvasHeight = 400;
+  
+ let canvas = document.getElementById("canvas");
+  let canvasWidth = 340;
+  let canvasHeight = 400;
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
 
   const UI_CONFIG = {
-    borderCanvas: 20,
     fieldHeight: canvasHeight + 5,
     fieldWidth: canvasWidth + 5,
     fieldColor: "#222",
@@ -28,7 +25,7 @@ var game = (function() {
   let ctx = canvas.getContext("2d");
   let snakeHead;
   let currentDirection = "right";
-  let gameStarted = true;
+  let gameStarted = false;
   let blinkInterval = 0;
   let isPaused = false;
   let hitTheObstacle = false;
@@ -85,11 +82,14 @@ var game = (function() {
       moveSnake();
       drawSnake(snake);
     } else {
-      gameStarted = false;
+      //gameStarted = false;
       drawSnake(snake);
       clearInterval(game);
+
+      //// Storing points to local storage
       storeInLS(points);
       setTimeout(() => {
+        displayScores();
         highscorePage.style.display = "block";
         setTimeout(()=>{
           highscorePage.style.display = "none";
@@ -123,7 +123,7 @@ var game = (function() {
       (head.x >= UI_CONFIG.fieldWidth - 10 ||
         head.y >= UI_CONFIG.fieldHeight - 10)
     ) {
-      console.log("udarac...", "\n", "snake", snake, "x", head.x, "y", head.y);
+
       hitTheObstacle = true;
     }
   };
@@ -172,8 +172,7 @@ var game = (function() {
     const downKey = 40;
     const space = 32;
     const keyPressed = event.keyCode;
-    console.log(event.key);
-    
+
     if (keyPressed == leftKey && currentDirection != "right") {
       currentDirection = "left";
     } else if (keyPressed == rightKey && currentDirection != "left") {
@@ -183,12 +182,20 @@ var game = (function() {
     } else if (keyPressed == downKey && currentDirection != "up") {
       currentDirection = "down";
     } else if (keyPressed == space) {
-      pauseGame();
+      if(!gameStarted){
+        mainPage.style.display = 'none';
+        gameInit();
+      } else {
+        pauseGame();
+      }
+      
     }
   };
 
   let pauseGame = () => {
-    if(gameStarted){
+    if(hitTheObstacle){
+      return false;
+    }
       isPaused === true ? (isPaused = false) : (isPaused = true);
       if (isPaused) {
         clearInterval(game);
@@ -197,12 +204,17 @@ var game = (function() {
         pausedPage.style.display = "none";
         game = setInterval(gameMech, GAME_CONFIG.snakeSpeed);
       }
-    }
-    
   };
 
-  // Getting directions for the snake
-  document.body.addEventListener("keydown", directSnake);
+
+  
+ // Getting directions for the snake
+
+
+
+  document.body.addEventListener("keydown",(e)=>{
+    directSnake(e);
+  });
 
   /***
    * STORING EMPTY 5 PLACES IN LS
@@ -214,14 +226,13 @@ var game = (function() {
 
   let gameInit = () => {
     clearInterval(game);
-    
     gameStarted = true;
+    isPaused = false;
     time = 0;
     points = 0;
     document.getElementById("score").innerHTML = points;
     currentDirection = "right";
     hitTheObstacle = false;
-    gameStarted = true;
     snake = [
       { x: 150, y: 150 },
       { x: 140, y: 150 },
@@ -253,8 +264,9 @@ var game = (function() {
 
   return {
     gameInit,
-    startGameBtn,
     mainPage,
-    points
+    points,
+    directSnake,
+    startGameBtn
   }
 })();

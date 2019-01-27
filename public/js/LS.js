@@ -56,3 +56,5 @@ function storeInLS(score) {
     localStorage.setItem("currentSession",JSON.stringify(tmp));
   }
 }
+
+
