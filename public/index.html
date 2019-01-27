@@ -4,19 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Snake Game</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Rubik:400,700"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="main.css" />
   </head>
 
   <body>
-    <div id="game-panel">
-        <div id="game-info">
-                <div id="score" class="info">Score : 320</div>        
-                <div id="time" class="info">Time : 00:00</div>
+    <div id="container">
+      <div id="game-info">
+        <div id="score" class="flex-item">Score : 320</div>
+        <div id="time" class="flex-item">Time : 00:00</div>
+      </div>
+      <div id="game-panel">
+        <div id="highscores-page"></div>
+        <div id="game-menu">
+          <div class="logo">
+            <img src="img/snake-eyes.png" alt="#" class="game-logo" />
+          </div>
+
+          <button class="game-button" id="startGameBtn">start game</button>
+          <button class="game-button" id="highscoresBtn">highscores</button>
         </div>
-        <canvas id="canvas"></canvas>
+        <div id="controls">
+          space - pause
+        </div>
+      </div>
+      <canvas id="canvas"></canvas>
+
+      <div id="footer">
+        <div class="flex-item">&copy; Miljan Rubezic</div>
+        <div class="flex-item">
+          <a href="https://github.com/RubezicM/snake-canvas">GitHub Repo</a>
+        </div>
+      </div>
     </div>
-    
     <script src="./js/config.js"></script>
     <script src="./js/main.js"></script>
   </body>

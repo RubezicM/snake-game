@@ -2,7 +2,13 @@
     box-sizing: border-box;
 }
 
-
+body {
+  font-family: 'Rubik', sans-serif;
+  line-height: 1.2;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
 table {
     border: 3px solid white;
     border-spacing: 0;
@@ -15,15 +21,58 @@ table {
     padding: 0
   }
 
+  /* main overlay */
   #game-panel {
-    padding: 8px;
-    display: inline-block;
-    background-color: black;
+    height: 400px;
+    position: relative;
+    left: 6px;
+    top: 31px;
+    width: 340px;
+    background-color: #222;
   }
-  #game-info {
+  #game-info,#footer {
     display: flex;
     justify-content: space-around;
+    padding: 5px 0;
+  }
+  .flex-item {
     color: white;
-    font-weight: bold;
+    font-size: 13px;
+  }
+  #container {
+    max-width: 350px;
+    padding: 5px;
+    background-color: #000000;
+    position: relative;
+    left: 300px;
   }
   
+  #highscores-page {
+    background: green;
+    display: none;
+    height: 75%;
+    width: 100%;
+  }
+  #canvas {
+    border: 1px solid white;
+  }
+
+  #game-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)
+  }
+  #game-menu .logo {
+    align-self: center
+  }
+
+  #game-menu > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  #game-menu > *:first-child{
+    margin-bottom: 35px;
+  }

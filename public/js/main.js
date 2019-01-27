@@ -1,7 +1,10 @@
 var game = (function() {
+  const startGameBtn = document.getElementById("startGameBtn");
+  const highScoreBtn = document.getElementById("highscoresBtn");
+ 
   var canvas = document.getElementById("canvas");
-  canvasWidth = 340;
-  canvasHeight = 400;
+  var canvasWidth = 340;
+  var canvasHeight = 400;
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
 
@@ -9,9 +12,9 @@ var game = (function() {
     borderCanvas: 20,
     fieldHeight: canvasHeight + 5,
     fieldWidth: canvasWidth + 5,
-    fieldColor: "#F7D800",
+    fieldColor: "#222",
     fieldBorderColor: "#171717",
-    snakeColor: "#3BD80D"
+    snakeColor: "white"
   };
   const GAME_CONFIG = {
     snakeSpeed: 65,
@@ -42,7 +45,8 @@ var game = (function() {
     ctx.fillStyle = UI_CONFIG.fieldColor;
     ctx.shadowColor = "#222";
     ctx.shadowBlur = 5;
-    ctx.fillRect(0, 0, UI_CONFIG.fieldWidth, UI_CONFIG.fieldHeight);
+    ctx.fillRect(2.5, 0, UI_CONFIG.fieldWidth, UI_CONFIG.fieldHeight);
+    // ctx.fillStroke(ctx.strokeRect(20, 20, 150, 100));
   };
   let snakeBody = (x, y) => {
     ctx.fillStyle = UI_CONFIG.snakeColor;
@@ -126,7 +130,6 @@ var game = (function() {
     }
   };
   let moveSnake = () => {
-    var leftRightMax = UI_CONFIG.fieldWidth - 10;
     if (currentDirection == "right") {
       snakeHead = { x: snake[0].x + GAME_CONFIG.snakePartSize, y: snake[0].y };
     } else if (currentDirection == "up") {
@@ -188,6 +191,7 @@ var game = (function() {
   document.body.addEventListener("keydown", directSnake);
 
   let gameInit = () => {
+    clearInterval(game);
     time = 0;
     points = 0;
     document.getElementById("score").innerHTML = points;
@@ -210,7 +214,7 @@ var game = (function() {
     game = setInterval(gameMech, GAME_CONFIG.snakeSpeed);
   };
 
-  gameInit();
+  //gameInit();
 
   function gameMech() {
     if (gameStarted) {
@@ -224,8 +228,12 @@ var game = (function() {
     return number;
   }
 
-  return gameInit;
+  return {
+    gameInit,
+    startGameBtn
+  }
 })();
 
-
-game.gameInit();
+game.startGameBtn.addEventListener('click',(e)=>{
+    game.gameInit();
+});
