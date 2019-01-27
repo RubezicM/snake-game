@@ -18,8 +18,11 @@
         <div id="score" class="flex-item">Score : 320</div>
         <div id="time" class="flex-item">Time : 00:00</div>
       </div>
+      <div id="paused-page">
+        Game is paused
+      </div>
+      <div id="highscores-page"></div>
       <div id="game-panel">
-        <div id="highscores-page"></div>
         <div id="game-menu">
           <div class="logo">
             <img src="img/snake-eyes.png" alt="#" class="game-logo" />
@@ -28,9 +31,7 @@
           <button class="game-button" id="startGameBtn">start game</button>
           <button class="game-button" id="highscoresBtn">highscores</button>
         </div>
-        <div id="controls">
-          space - pause
-        </div>
+        <div id="controls">space - pause</div>
       </div>
       <canvas id="canvas"></canvas>
 
@@ -41,7 +42,9 @@
         </div>
       </div>
     </div>
-    <script src="./js/config.js"></script>
+    <script src="./js/LS.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/events.js"></script>
+    
   </body>
 </html>

@@ -1,6 +1,9 @@
 var game = (function() {
   const startGameBtn = document.getElementById("startGameBtn");
   const highScoreBtn = document.getElementById("highscoresBtn");
+  const highscorePage = document.getElementById("highscores-page");
+  const mainPage = document.getElementById("game-panel");
+  const pausedPage =document.getElementById("paused-page");
  
   var canvas = document.getElementById("canvas");
   var canvasWidth = 340;
@@ -76,17 +79,22 @@ var game = (function() {
 
   let drawGame = () => {
     collisionCheck(snakeHead);
-
     if (!hitTheObstacle) {
       clearCanvas();
       prayBody(pray.x, pray.y);
       moveSnake();
       drawSnake(snake);
     } else {
+      gameStarted = false;
       drawSnake(snake);
       clearInterval(game);
+      storeInLS(points);
       setTimeout(() => {
-        gameInit();
+        highscorePage.style.display = "block";
+        setTimeout(()=>{
+          highscorePage.style.display = "none";
+          gameInit();
+        },3000)
       }, 1000);
     }
   };
@@ -164,7 +172,8 @@ var game = (function() {
     const downKey = 40;
     const space = 32;
     const keyPressed = event.keyCode;
-
+    console.log(event.key);
+    
     if (keyPressed == leftKey && currentDirection != "right") {
       currentDirection = "left";
     } else if (keyPressed == rightKey && currentDirection != "left") {
@@ -179,23 +188,37 @@ var game = (function() {
   };
 
   let pauseGame = () => {
-    isPaused === true ? (isPaused = false) : (isPaused = true);
-    if (isPaused) {
-      clearInterval(game);
-    } else {
-      game = setInterval(gameMech, GAME_CONFIG.snakeSpeed);
+    if(gameStarted){
+      isPaused === true ? (isPaused = false) : (isPaused = true);
+      if (isPaused) {
+        clearInterval(game);
+        pausedPage.style.display = "flex";
+      } else {
+        pausedPage.style.display = "none";
+        game = setInterval(gameMech, GAME_CONFIG.snakeSpeed);
+      }
     }
+    
   };
 
   // Getting directions for the snake
   document.body.addEventListener("keydown", directSnake);
 
+  /***
+   * STORING EMPTY 5 PLACES IN LS
+   * 
+   */
+  // Initial storing in a LS
+  storeInLS();
+
+
   let gameInit = () => {
     clearInterval(game);
+    
+    gameStarted = true;
     time = 0;
     points = 0;
     document.getElementById("score").innerHTML = points;
-
     currentDirection = "right";
     hitTheObstacle = false;
     gameStarted = true;
@@ -230,10 +253,8 @@ var game = (function() {
 
   return {
     gameInit,
-    startGameBtn
+    startGameBtn,
+    mainPage,
+    points
   }
 })();
-
-game.startGameBtn.addEventListener('click',(e)=>{
-    game.gameInit();
-});

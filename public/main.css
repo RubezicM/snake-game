@@ -22,13 +22,26 @@ table {
   }
 
   /* main overlay */
-  #game-panel {
+  #game-panel,#highscores-page,#paused-page {
     height: 400px;
-    position: relative;
+    position: absolute;
     left: 6px;
     top: 31px;
     width: 340px;
     background-color: #222;
+  }
+  .game-button {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .game-button:hover {
+    color: green;
   }
   #game-info,#footer {
     display: flex;
@@ -48,15 +61,24 @@ table {
   }
   
   #highscores-page {
-    background: green;
+    background: white;
+    display:none;
+  }
+  #paused-page {
     display: none;
-    height: 75%;
-    width: 100%;
+    color: white;
+    align-items: center;
+    justify-content: center;
   }
   #canvas {
     border: 1px solid white;
   }
-
+  #controls {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    color: white;
+  }
   #game-menu {
     display: flex;
     flex-direction: column;
@@ -74,5 +96,5 @@ table {
   }
 
   #game-menu > *:first-child{
-    margin-bottom: 35px;
+    margin-bottom: 65px;
   }
